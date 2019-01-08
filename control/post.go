@@ -232,7 +232,7 @@ func PostDel(ctx echo.Context) error {
 		return ctx.JSON(util.NewFail(`删除失败,请重试`))
 	}
 	// 删除 文章对应的标签信息
-	//model.TagPostDels(id)
-	model.PostTagDel(id)
+	model.TagPostDels(id)
+	
 	return ctx.JSON(util.NewSucc(`删除成功`))
 }
