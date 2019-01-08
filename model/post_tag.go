@@ -102,12 +102,15 @@ func TagPostDels(tid int) bool {
 	return false
 }
 
-// PostTagDel 删除文章对应的标签_文章删除文章的时候
-func PostTagDel(pid int) bool {
+// PostTagDels 删除文章_标签
+func PostTagDels(pid int, tids []int) bool {
+	if len(tids) < 1 {
+		return true
+	}
 	sess := DB.NewSession()
 	defer sess.Close()
 	sess.Begin()
-	if affect, err := sess.Where("post_id = ?", pid).Delete(&PostTag{}); affect > 0 && err == nil {
+	if affect, err := sess.Where("post_id = ?", pid).In("tag_id", tids).Delete(&PostTag{}); affect > 0 && err == nil {
 		sess.Commit()
 		DB.ClearCache(new(PostTag)) //清空缓存
 		return true
