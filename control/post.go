@@ -137,7 +137,7 @@ func PostOpts(ctx echo.Context) error {
 				model.PostTagDels(ipt.Post.Id, del)
 				// 添加标签
 				model.TagPostAdds(&tagAdds)
-				return ctx.JSON(util.NewSucc(`文章修改成功`))
+				return ctx.JSON(util.NewSucc(`文章修改成33功`))
 			}
 			return ctx.JSON(util.NewSucc(`页面修改成功`))
 		}
@@ -232,6 +232,7 @@ func PostDel(ctx echo.Context) error {
 		return ctx.JSON(util.NewFail(`删除失败,请重试`))
 	}
 	// 删除 文章对应的标签信息
-	model.TagPostDels(id)
+	//model.TagPostDels(id)
+	model.PostTagDel(id)
 	return ctx.JSON(util.NewSucc(`删除成功`))
 }
